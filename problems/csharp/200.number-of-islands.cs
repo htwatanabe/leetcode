@@ -13,19 +13,15 @@ public class Solution {
         Queue<(int i, int j)> queue = new();
 
         void dfs(int i, int j) {
-            if (isChecked[i,j]) return;
-            if (grid[i][j] == '0') return;
-
             queue.Enqueue((i, j));
 
             while(queue.Count > 0) {
                 var t = queue.Dequeue();
-                if (t.i < 0 | grid.Length <= t.i || t.j < 0 || grid[t.i].Length <= t.j) continue;
+                if (t.i < 0 || grid.Length <= t.i || t.j < 0 || grid[t.i].Length <= t.j) continue;
                 if (isChecked[t.i,t.j]) continue;
                 isChecked[t.i,t.j] = true;
 
                 if (grid[t.i][t.j] == '0') continue;
-
                 queue.Enqueue((t.i-1, t.j));
                 queue.Enqueue((t.i, t.j-1));
                 queue.Enqueue((t.i+1, t.j));
