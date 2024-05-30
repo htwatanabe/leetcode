@@ -12,7 +12,7 @@ public class Solution {
         bool [,] isChecked = new bool[grid.Length, grid[0].Length];
         Queue<(int i, int j)> queue = new();
 
-        void dfs(int i, int j) {
+        void bfs(int i, int j) {
             queue.Enqueue((i, j));
 
             while(queue.Count > 0) {
@@ -33,7 +33,7 @@ public class Solution {
             for (var j = 0; j < grid[i].Length; j++) {
                 if(!isChecked[i,j] && grid[i][j] == '1') {
                     ret++;
-                    dfs(i, j);
+                    bfs(i, j);
                 }
             }
         }
