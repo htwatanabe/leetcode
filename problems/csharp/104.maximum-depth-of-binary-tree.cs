@@ -25,9 +25,9 @@ public class Solution {
         var stack = new Stack<(TreeNode, int)>();
         stack.Push((root, 0));
         while (stack.Count > 0) {
-            var (currentNode, currentDepth) = stack.Pop();
+            var (currentNode, parentDepth) = stack.Pop();
             if (currentNode == null) continue;
-            currentDepth++;
+            var currentDepth = parentDepth + 1;
             if (currentDepth > ret) ret = currentDepth;
             stack.Push((currentNode.left, currentDepth));
             stack.Push((currentNode.right, currentDepth));
@@ -35,19 +35,19 @@ public class Solution {
         return ret;
     }
 
-    // // Recursion
-    // public int MaxDepth(TreeNode root) {
-    //     int ret = 0;
-    //     void dfs(TreeNode node, int depth) {
-    //         if (node == null) return;
-    //         var currentDepth = depth + 1;
-    //         if (currentDepth > ret) ret = currentDepth;
-    //         dfs(node.left, currentDepth);
-    //         dfs(node.right, currentDepth);
-    //     }
-    //     dfs(root, ret);
-    //     return ret;
-    // }
+    // Recursion
+    public int MaxDepthR(TreeNode root) {
+        int ret = 0;
+        void dfs(TreeNode node, int depth) {
+            if (node == null) return;
+            var currentDepth = depth + 1;
+            if (currentDepth > ret) ret = currentDepth;
+            dfs(node.left, currentDepth);
+            dfs(node.right, currentDepth);
+        }
+        dfs(root, ret);
+        return ret;
+    }
 }
 
 // @lc code=end
