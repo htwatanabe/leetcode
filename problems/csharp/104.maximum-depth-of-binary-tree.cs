@@ -19,18 +19,35 @@
  * }
  */
 public class Solution {
+    // No recursion
     public int MaxDepth(TreeNode root) {
-        int ret = 0;
-        void dfs(TreeNode node, int depth) {
-            if (node == null) return;
-            var currentDepth = depth + 1;
+        var ret = 0;
+        var stack = new Stack<(TreeNode, int)>();
+        stack.Push((root, 0));
+        while (stack.Count > 0) {
+            var (currentNode, currentDepth) = stack.Pop();
+            if (currentNode == null) continue;
+            currentDepth++;
             if (currentDepth > ret) ret = currentDepth;
-            dfs(node.left, currentDepth);
-            dfs(node.right, currentDepth);
+            stack.Push((currentNode.left, currentDepth));
+            stack.Push((currentNode.right, currentDepth));
         }
-        dfs(root, ret);
         return ret;
     }
+
+    // // Recursion
+    // public int MaxDepth(TreeNode root) {
+    //     int ret = 0;
+    //     void dfs(TreeNode node, int depth) {
+    //         if (node == null) return;
+    //         var currentDepth = depth + 1;
+    //         if (currentDepth > ret) ret = currentDepth;
+    //         dfs(node.left, currentDepth);
+    //         dfs(node.right, currentDepth);
+    //     }
+    //     dfs(root, ret);
+    //     return ret;
+    // }
 }
 
 // @lc code=end
