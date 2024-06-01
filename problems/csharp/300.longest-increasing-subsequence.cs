@@ -9,8 +9,8 @@
 // too slow
 public class Solution {
     public int LengthOfLIS(int[] nums) {
-        var dp = new int[nums.Length];
         var len = nums.Length;
+        var dp = new int[len];
         void fillDpArray(int idx) {
             for (var i = idx; i < len; i++) {
                 if (dp[i] != 0) return;
