@@ -11,12 +11,12 @@ public class Solution {
     public int LengthOfLIS(int[] nums) {
         var dp = new int[nums.Length];
         var len = nums.Length;
-        void makeDpArray(int idx) {
+        void fillDpArray(int idx) {
             for (var i = idx; i < len; i++) {
                 if (dp[i] != 0) return;
                 for (var j = i+1; j < len; j++) {
                     if (nums[i] < nums[j]) {
-                        if (dp[j] == 0) makeDpArray(j);
+                        if (dp[j] == 0) fillDpArray(j);
                         if (dp[i] < dp[j]+1) dp[i] = dp[j]+1;
                     }
                 }
@@ -24,7 +24,7 @@ public class Solution {
             }
         }
 
-        makeDpArray(0);
+        fillDpArray(0);
         return dp.Max();
     }
 }
